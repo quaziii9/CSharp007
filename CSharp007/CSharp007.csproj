@@ -11,14 +11,12 @@
     <Compile Remove="Program.cs" />
     <Compile Remove="Program01.cs" />
     <Compile Remove="stackClass.cs" />
-    <Compile Remove="test.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Program.cs" />
     <None Include="Program01.cs" />
     <None Include="stackClass.cs" />
-    <None Include="test.cs" />
   </ItemGroup>
 
 </Project>

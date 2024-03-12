@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,37 +25,36 @@ namespace CSharp007
         { 
             if (!IsFull())
             {
-                tail = (tail+1) % MAX_VALUES;
-                values[tail] = val;
+                tail = tail % MAX_VALUES;
+                values[tail++] = val;
             }
             else
             {
-                Console.WriteLine("Full!");
+                Console.WriteLine("Full! Enqueue 불가능!");
             }
         }
 
-        public T Dequeue()
-        {
-           
+        public void Dequeue()
+        { 
             if (!IsEmpty())
             {
-                
+                head = head % MAX_VALUES;
+                values[head++] = default(T);
             }
             else
             {
-                Console.Write("초기화");
-                return default(T);
+                Console.WriteLine("초기화 Deque 불가능");
             }
         }
+        public bool IsFull() { return (tail + 1) % MAX_VALUES == head; }
 
-        public bool IsEmpty()
+        public bool IsEmpty() { return head == tail; }
+      
+        public void Print()
         {
-            return head == tail; 
-        }
-        public bool IsFull()
-        {
-            if (tail == MAX_VALUES - 1 || (head + 1) % MAX_VALUES == tail) return true;
-            else return false;
+            foreach (T i in values)
+                Console.Write($"   {i}   |");
+            Console.WriteLine();
         }
     }
 
@@ -69,15 +69,23 @@ namespace CSharp007
 
             Queue <int> arrQ = new Queue<int>();
 
-            arrQ.Enqueue(1);    // 1
-            
-            arrQ.Enqueue(2);    // 2
-            arrQ.Enqueue(3);    // 3
+            arrQ.Enqueue(1);
+            arrQ.Enqueue(2);
+            arrQ.Enqueue(3);
             arrQ.Enqueue(4);
-            //arrQ.Dequeue();
-            //arrQ.Dequeue();
-            //arrQ.Dequeue();
+            arrQ.Enqueue(5);
+            arrQ.Enqueue(6);
+            arrQ.Enqueue(7);
 
+            arrQ.Dequeue();
+            arrQ.Dequeue();
+            arrQ.Dequeue();
+            arrQ.Dequeue();
+            arrQ.Dequeue();
+            arrQ.Dequeue();
+
+            arrQ.Enqueue(8);
+            arrQ.Print();
         }
     }
 }
